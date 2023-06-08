@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="JBSharModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CaseRecord">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="date" />
+          <Property Name="CaseNum" Type="int" />
+          <Property Name="Person1" Type="nvarchar(max)" />
+          <Property Name="Person2" Type="nvarchar(max)" />
+          <Property Name="Lawyer" Type="nvarchar(max)" />
+          <Property Name="Room" Type="int" />
+          <Property Name="Type" Type="nvarchar(max)" />
+          <Property Name="CaseDecesionNum" Type="int" />
+          <Property Name="Execution" Type="nvarchar(max)" />
+          <Property Name="Notes" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Sitting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Year" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="JBSharModelStoreContainer">
+          <EntitySet Name="CaseRecord" EntityType="Self.CaseRecord" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sitting" EntityType="Self.Sitting" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="JBSharModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="JBSharEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CaseRecords" EntityType="JBSharModel.CaseRecord" />
+          <EntitySet Name="Sittings" EntityType="JBSharModel.Sitting" />
+        </EntityContainer>
+        <EntityType Name="CaseRecord">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="CaseNum" Type="Int32" />
+          <Property Name="Person1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Person2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Lawyer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Room" Type="Int32" />
+          <Property Name="Type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CaseDecesionNum" Type="Int32" />
+          <Property Name="Execution" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Sitting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Year" Type="Int32" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="JBSharModelStoreContainer" CdmEntityContainer="JBSharEntities">
+          <EntitySetMapping Name="CaseRecords">
+            <EntityTypeMapping TypeName="JBSharModel.CaseRecord">
+              <MappingFragment StoreEntitySet="CaseRecord">
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Execution" ColumnName="Execution" />
+                <ScalarProperty Name="CaseDecesionNum" ColumnName="CaseDecesionNum" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Room" ColumnName="Room" />
+                <ScalarProperty Name="Lawyer" ColumnName="Lawyer" />
+                <ScalarProperty Name="Person2" ColumnName="Person2" />
+                <ScalarProperty Name="Person1" ColumnName="Person1" />
+                <ScalarProperty Name="CaseNum" ColumnName="CaseNum" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sittings">
+            <EntityTypeMapping TypeName="JBSharModel.Sitting">
+              <MappingFragment StoreEntitySet="Sitting">
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
