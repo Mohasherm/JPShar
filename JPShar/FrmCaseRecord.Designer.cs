@@ -47,6 +47,9 @@
             this.btnExportToExcel = new DevExpress.XtraBars.BarButtonItem();
             this.btnLockYear = new DevExpress.XtraBars.BarButtonItem();
             this.btnBackup = new DevExpress.XtraBars.BarButtonItem();
+            this.btnAdmin = new DevExpress.XtraBars.BarButtonItem();
+            this.btnAdminDel = new DevExpress.XtraBars.BarButtonItem();
+            this.btnSitting = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
@@ -88,9 +91,12 @@
             this.btnReNew,
             this.btnLockYear,
             this.btnExportToExcel,
-            this.btnBackup});
+            this.btnBackup,
+            this.btnAdmin,
+            this.btnAdminDel,
+            this.btnSitting});
             this.barManager1.MainMenu = this.bar1;
-            this.barManager1.MaxItemId = 5;
+            this.barManager1.MaxItemId = 8;
             // 
             // bar1
             // 
@@ -104,7 +110,10 @@
             new DevExpress.XtraBars.LinkPersistInfo(this.btnReNew, true),
             new DevExpress.XtraBars.LinkPersistInfo(this.btnExportToExcel, true),
             new DevExpress.XtraBars.LinkPersistInfo(this.btnLockYear, true),
-            new DevExpress.XtraBars.LinkPersistInfo(this.btnBackup, true)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnBackup, true),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnAdmin, true),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnAdminDel, true),
+            new DevExpress.XtraBars.LinkPersistInfo(this.btnSitting, true)});
             this.bar1.OptionsBar.MultiLine = true;
             this.bar1.OptionsBar.UseWholeRow = true;
             this.bar1.Text = "MainMenu";
@@ -169,13 +178,37 @@
             this.btnBackup.SuperTip = superToolTip5;
             this.btnBackup.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnBackup_ItemClick);
             // 
+            // btnAdmin
+            // 
+            this.btnAdmin.Caption = "AdminEdit";
+            this.btnAdmin.Id = 5;
+            this.btnAdmin.Name = "btnAdmin";
+            this.btnAdmin.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            this.btnAdmin.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnAdmin_ItemClick);
+            // 
+            // btnAdminDel
+            // 
+            this.btnAdminDel.Caption = "AdminDel";
+            this.btnAdminDel.Id = 6;
+            this.btnAdminDel.Name = "btnAdminDel";
+            this.btnAdminDel.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            this.btnAdminDel.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnAdminDel_ItemClick);
+            // 
+            // btnSitting
+            // 
+            this.btnSitting.Caption = "Sitting";
+            this.btnSitting.Id = 7;
+            this.btnSitting.Name = "btnSitting";
+            this.btnSitting.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            this.btnSitting.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnSitting_ItemClick);
+            // 
             // barDockControlTop
             // 
             this.barDockControlTop.CausesValidation = false;
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
             this.barDockControlTop.Manager = this.barManager1;
-            this.barDockControlTop.Size = new System.Drawing.Size(1237, 26);
+            this.barDockControlTop.Size = new System.Drawing.Size(1237, 39);
             // 
             // barDockControlBottom
             // 
@@ -189,27 +222,27 @@
             // 
             this.barDockControlLeft.CausesValidation = false;
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
-            this.barDockControlLeft.Location = new System.Drawing.Point(0, 26);
+            this.barDockControlLeft.Location = new System.Drawing.Point(0, 39);
             this.barDockControlLeft.Manager = this.barManager1;
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 574);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 561);
             // 
             // barDockControlRight
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(1237, 26);
+            this.barDockControlRight.Location = new System.Drawing.Point(1237, 39);
             this.barDockControlRight.Manager = this.barManager1;
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 574);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 561);
             // 
             // layoutControl1
             // 
             this.layoutControl1.Controls.Add(this.gridControl1);
             this.layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.layoutControl1.Location = new System.Drawing.Point(0, 26);
+            this.layoutControl1.Location = new System.Drawing.Point(0, 39);
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.OptionsView.RightToLeftMirroringApplied = true;
             this.layoutControl1.Root = this.layoutControlGroup1;
-            this.layoutControl1.Size = new System.Drawing.Size(1237, 574);
+            this.layoutControl1.Size = new System.Drawing.Size(1237, 561);
             this.layoutControl1.TabIndex = 4;
             this.layoutControl1.Text = "layoutControl1";
             // 
@@ -219,7 +252,7 @@
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.MenuManager = this.barManager1;
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(1213, 550);
+            this.gridControl1.Size = new System.Drawing.Size(1213, 537);
             this.gridControl1.TabIndex = 4;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -331,7 +364,7 @@
             this.layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
             this.layoutControlItem1});
             this.layoutControlGroup1.Name = "layoutControlGroup1";
-            this.layoutControlGroup1.Size = new System.Drawing.Size(1237, 574);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(1237, 561);
             this.layoutControlGroup1.TextVisible = false;
             // 
             // layoutControlItem1
@@ -339,7 +372,7 @@
             this.layoutControlItem1.Control = this.gridControl1;
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(1217, 554);
+            this.layoutControlItem1.Size = new System.Drawing.Size(1217, 541);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
@@ -399,5 +432,8 @@
         private DevExpress.XtraBars.BarButtonItem btnExportToExcel;
         private DevExpress.XtraBars.BarButtonItem btnBackup;
         private DevExpress.XtraGrid.Columns.GridColumn CaseDecesionNum;
+        private DevExpress.XtraBars.BarButtonItem btnAdmin;
+        private DevExpress.XtraBars.BarButtonItem btnAdminDel;
+        private DevExpress.XtraBars.BarButtonItem btnSitting;
     }
 }

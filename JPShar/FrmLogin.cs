@@ -20,6 +20,7 @@ namespace JPShar
         }
         private JBSharEntities db;
         public bool isClose = true;
+        public bool isAdmin = false;
         private void FrmLogin_Load(object sender, EventArgs e)
         {
             db = new JBSharEntities();
@@ -41,18 +42,31 @@ namespace JPShar
                     MessageBox.Show("أدخل كلمة السر");
                     return;
                 }
-                var user = await db.Sittings.FirstOrDefaultAsync();
 
-                if (user.UserName.Equals(txtUserName.EditValue.ToString())
-                    && user.Password.Equals(txtPassword.EditValue.ToString()))
+                var username = Properties.Settings.Default.UserName;
+                var password = Properties.Settings.Default.Password;
+                if (username.Equals(txtUserName.EditValue.ToString())
+                    && password.Equals(txtPassword.EditValue.ToString()))
                 {
                     isClose = false;
+                    isAdmin = true;
                     this.Close();
                 }
                 else
                 {
-                    MessageBox.Show("فشل في عملية تسجيل الدخول");
-                    return;
+                    var user = await db.Sittings.FirstOrDefaultAsync();
+
+                    if (user.UserName.Equals(txtUserName.EditValue.ToString())
+                        && user.Password.Equals(txtPassword.EditValue.ToString()))
+                    {
+                        isClose = false;
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("فشل في عملية تسجيل الدخول");
+                        return;
+                    }
                 }
             }
             catch (Exception)

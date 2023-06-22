@@ -15,13 +15,14 @@ namespace JPShar
             InitializeComponent();
         }
         private JBSharEntities db;
-
+        private bool isAdmin = false;
         private void FrmCaseRecord_Load(object sender, EventArgs e)
         {
 
             FrmLogin log = new FrmLogin();
             log.ShowDialog();
 
+            isAdmin = log.isAdmin;
             if (log.isClose)
             {
                 Close();
@@ -30,6 +31,12 @@ namespace JPShar
             db = new JBSharEntities();
             refreshGrid();
 
+            if (isAdmin)
+            {
+                btnAdmin.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+                btnAdminDel.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+                btnSitting.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+            }
 
             ColumnFilterInfo filter = new ColumnFilterInfo("[Date] between (#01 JAN 2016#, #01 DEC 2090#)", "");
             gridView1.ActiveFilter.Add(Date, filter);
@@ -68,7 +75,11 @@ namespace JPShar
         {
             SaveFileDialog dia = new SaveFileDialog();
             dia.Filter = "Excel Files (*.xlsx)|*.xlsx";
-            dia.ShowDialog();
+            var result = dia.ShowDialog();
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
             gridControl1.ExportToXlsx(dia.FileName);
         }
 
@@ -117,7 +128,6 @@ namespace JPShar
             {
 
             }
-
         }
 
         private void gridView1_DoubleClick(object sender, EventArgs e)
@@ -125,8 +135,8 @@ namespace JPShar
             var selectedrows = gridView1.GetSelectedRows();
             if (selectedrows.Count() == 0 || selectedrows[0] < 0)
             {
-                XtraMessageBox.Show("الرجاء اختيار دعوى أولاً","تنبيه");
-                return; 
+                XtraMessageBox.Show("الرجاء اختيار دعوى أولاً", "تنبيه");
+                return;
             }
 
             int id = Convert.ToInt32(gridView1.GetFocusedRowCellValue(Id));
@@ -134,6 +144,45 @@ namespace JPShar
             frm.ShowDialog();
             db = new JBSharEntities();
             refreshGrid();
+        }
+
+        private void btnAdmin_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            var selectedrows = gridView1.GetSelectedRows();
+            if (selectedrows.Count() == 0 || selectedrows[0] < 0)
+            {
+                XtraMessageBox.Show("الرجاء اختيار دعوى أولاً", "تنبيه");
+                return;
+            }
+
+            int id = Convert.ToInt32(gridView1.GetFocusedRowCellValue(Id));
+            FrmEditCaseRecordAdmin frm = new FrmEditCaseRecordAdmin(id);
+            frm.ShowDialog();
+            db = new JBSharEntities();
+            refreshGrid();
+        }
+
+        private void btnAdminDel_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            var selectedrows = gridView1.GetSelectedRows();
+            if (selectedrows.Count() == 0 || selectedrows[0] < 0)
+            {
+                XtraMessageBox.Show("الرجاء اختيار دعوى أولاً", "تنبيه");
+                return;
+            }
+
+            int id = Convert.ToInt32(gridView1.GetFocusedRowCellValue(Id));
+            var data = db.CaseRecords.Find(id);
+            db.CaseRecords.Remove(data);
+            db.SaveChanges();
+            XtraMessageBox.Show("تم الحذف بنجاح");
+            refreshGrid();
+        }
+
+        private void btnSitting_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            FrmSitting frm = new FrmSitting();
+            frm.ShowDialog();
         }
     }
 }
