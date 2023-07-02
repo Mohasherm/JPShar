@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="JBSharModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="JBSharModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CaseRecord">
           <Key>
             <PropertyRef Name="Id" />
@@ -34,14 +34,11 @@
           <EntitySet Name="CaseRecord" EntityType="Self.CaseRecord" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sitting" EntityType="Self.Sitting" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="JBSharModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="JBSharEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="CaseRecords" EntityType="JBSharModel.CaseRecord" />
-          <EntitySet Name="Sittings" EntityType="JBSharModel.Sitting" />
-        </EntityContainer>
         <EntityType Name="CaseRecord">
           <Key>
             <PropertyRef Name="Id" />
@@ -63,10 +60,14 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Year" Type="Int32" Nullable="false" />
         </EntityType>
+        <EntityContainer Name="JBSharEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CaseRecords" EntityType="Self.CaseRecord" />
+          <EntitySet Name="Sittings" EntityType="Self.Sitting" />
+        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -76,27 +77,27 @@
           <EntitySetMapping Name="CaseRecords">
             <EntityTypeMapping TypeName="JBSharModel.CaseRecord">
               <MappingFragment StoreEntitySet="CaseRecord">
-                <ScalarProperty Name="Notes" ColumnName="Notes" />
-                <ScalarProperty Name="Execution" ColumnName="Execution" />
-                <ScalarProperty Name="CaseDecesionNum" ColumnName="CaseDecesionNum" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="Room" ColumnName="Room" />
-                <ScalarProperty Name="Lawyer" ColumnName="Lawyer" />
-                <ScalarProperty Name="Person2" ColumnName="Person2" />
-                <ScalarProperty Name="Person1" ColumnName="Person1" />
-                <ScalarProperty Name="CaseNum" ColumnName="CaseNum" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="CaseNum" ColumnName="CaseNum" />
+                <ScalarProperty Name="Person1" ColumnName="Person1" />
+                <ScalarProperty Name="Person2" ColumnName="Person2" />
+                <ScalarProperty Name="Lawyer" ColumnName="Lawyer" />
+                <ScalarProperty Name="Room" ColumnName="Room" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="CaseDecesionNum" ColumnName="CaseDecesionNum" />
+                <ScalarProperty Name="Execution" ColumnName="Execution" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Sittings">
             <EntityTypeMapping TypeName="JBSharModel.Sitting">
               <MappingFragment StoreEntitySet="Sitting">
-                <ScalarProperty Name="Year" ColumnName="Year" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

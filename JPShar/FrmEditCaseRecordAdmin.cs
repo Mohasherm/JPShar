@@ -33,6 +33,7 @@ namespace JPShar
             txtLawyer.EditValue = data.Lawyer;
             cmbType.Text = data.Type;
             numRoom.EditValue = data.Room;
+            dtDate.EditValue = data.Date;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -46,6 +47,7 @@ namespace JPShar
                 data.Lawyer = txtLawyer.EditValue.ToString();
                 data.Type = cmbType.EditValue.ToString();
                 data.Room = Convert.ToInt32(numRoom.Value);
+                data.Date = Convert.ToDateTime(dtDate.EditValue);
 
                 db.Entry(data).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();

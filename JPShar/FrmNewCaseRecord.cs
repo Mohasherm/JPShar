@@ -43,6 +43,8 @@ namespace JPShar
                 numRoom.Enabled = false;
                 numRoom.Properties.ReadOnly = true;
                 numRoom.EditValue = "0";
+                layoutControlItem9.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
+                layoutControlItem10.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.Never;
             }
         }
 
@@ -68,8 +70,20 @@ namespace JPShar
                 XtraMessageBox.Show("أدخل نوع الدعوى");
                 return;
             }
-
-            try
+            if (id > 0)
+            {
+                if (txtNewNum.EditValue == null)
+                {
+                    XtraMessageBox.Show("أدخل رقم اساس الدعوى القديمة");
+                    return;
+                }
+                if (txtYeaR.EditValue == null)
+                {
+                    XtraMessageBox.Show("أدخل العام");
+                    return;
+                }
+            }
+                try
             {
                 Cursor = Cursors.WaitCursor;
 
@@ -85,6 +99,7 @@ namespace JPShar
 
                 if (id > 0)
                 {
+                    data.Type = "تجديد دعوى رقم أساس " + txtNewNum.EditValue.ToString() + " لعام " + txtYeaR.EditValue.ToString();
                     data.Room = Convert.ToInt32(numRoom.Value);
                 }
                 else

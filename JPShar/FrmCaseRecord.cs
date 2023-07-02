@@ -44,7 +44,7 @@ namespace JPShar
         }
         void refreshGrid()
         {
-            gridControl1.DataSource = db.CaseRecords.ToList();
+            gridControl1.DataSource = db.CaseRecords.OrderByDescending(x => x.Id).ToList();
         }
 
         private void btnAdd_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
